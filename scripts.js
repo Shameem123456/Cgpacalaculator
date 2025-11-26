@@ -48,7 +48,7 @@ function addSubject(){
 
       <div class="col">
         <label><input type="checkbox" id="use-components-${subjectCount}" onchange="toggleSubjectMode(${subjectCount})"> Use External + Internal</label>
-        <div class="muted small">Enable to input component marks separately</div>
+        <div class="muted small">Enable to input external & internal marks separately</div>
       </div>
     </div>
 
@@ -66,7 +66,7 @@ function addSubject(){
       <label>Internal - Scored</label><input type="number" id="int-scored-${subjectCount}" min="0" placeholder="e.g., 28">
     </div>
 
-    <div class="muted small">Note: If using components, total = external + internal. Fail rules apply if enabled.</div>
+    <div class="muted small">Note: Check the failing mark in the setting.if it is less than the mark required,then the grade is point zero for the given subject.</div>
   `;
 
   cont.appendChild(div);
