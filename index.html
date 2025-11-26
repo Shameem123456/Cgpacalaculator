@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Enhanced SGPA & CGPA Calculator — Modern Dark Theme</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dark"> <!-- Dark mode default -->
+  <div class="app-wrap">
+    <header class="app-header">
+      <div>
+        <h1>🎓 Enhanced SGPA & CGPA Calculator</h1>
+        <div class="subtitle">Modern theme — dashboards open after calculation</div>
+      </div>
+      <div class="hdr-actions">
+        <button id="toggle-theme" class="btn" onclick="toggleDarkMode()">Toggle Theme</button>
+      </div>
+    </header>
+
+    <!-- MAIN FORM (visible by default; dashboards hidden until calculation) -->
+    <main id="main-area" class="main-area">
+      <!-- SGPA Form -->
+      <section class="card">
+        <div class="card-head">
+          <h2>📘 SGPA Calculator</h2>
+        </div>
+
+        <div class="controls">
+          <div class="left-controls">
+            <button class="btn primary" onclick="addSubject()">➕ Add Subject</button>
+            <button class="btn warn" onclick="removeSubject()">➖ Remove Subject</button>
+          </div>
+          <div class="note muted">Enter credits and marks. Use External + Internal mode if needed. Validation prevents scored &gt; total.</div>
+        </div>
+
+        <div id="validation-summary" class="validation-summary" style="display:none;"></div>
+
+        <div id="subjects-container" class="subjects-container"></div>
+
+        <div class="form-actions">
+          <button id="calculate-sgpa" class="btn success" onclick="handleCalculateSGPA()">Calculate SGPA & Open Dashboard</button>
+          <div class="muted small">SGPA formula: Σ(GradePoint × Credit) / Σ(Credit)</div>
+        </div>
+      </section>
+
+      <!-- CGPA Form -->
+      <section class="card">
+        <div class="card-head">
+          <h2>📕 CGPA Calculator</h2>
+        </div>
+
+        <div class="controls">
+          <label>Number of semesters:</label>
+          <input id="num-semesters" type="number" min="1" placeholder="e.g., 6" />
+          <button class="btn" onclick="generateCGPAInputs()">Create Semester Fields</button>
+        </div>
+
+        <div id="cgpa-inputs" class="cgpa-inputs"></div>
+
+        <div class="form-actions">
+          <button id="calculate-cgpa" class="btn primary" onclick="handleCalculateCGPA()">Calculate CGPA & Open Dashboard</button>
+          <button class="btn" onclick="downloadAllEntries()">Download Entries (text)</button>
+        </div>
+
+        <div class="muted small">Enter SGPA and credit for each semester. CGPA = Σ(SGPA × credit) / Σ(credit)</div>
+      </section>
+
+      <!-- Settings quick link -->
+      <section style="margin-top:12px;text-align:right">
+        <button class="btn" onclick="openSettingsModal()">Open Grade & Pass Criteria Settings</button>
+      </section>
+
+      <!-- Settings -->
+      <section class="card" style="display:none">
+        <div class="card-head">
+          <h2>⚙️ Custom Grade Settings (Hidden)</h2>
+        </div>
+      </section>
+    </main>
+
+    <!-- SGPA DASHBOARD VIEW (hidden until SGPA calculation) -->
+    <section id="sgpa-dashboard" class="card dashboard" style="display:none;">
+      <div class="dashboard-head">
+        <h2>📋 SGPA Dashboard</h2>
+        <div class="dashboard-actions">
+          <button class="btn" onclick="printDashboard('sgpa')">🖨 Print SGPA Report</button>
+          <button class="btn" onclick="editSGPA()">✏️ Edit Marks</button>
+          <button class="btn" onclick="closeSGPADashboard()">Close</button>
+        </div>
+      </div>
+
+      <div class="dash-top">
+        <div class="sgpa-summary">
+          <div class="label">SGPA</div>
+          <div id="dashboard-sgpa-val" class="sgpa-big">-</div>
+        </div>
+        <div class="dash-stats">
+          <p>Highest: <strong id="dash-highest">-</strong></p>
+          <p>Lowest: <strong id="dash-lowest">-</strong></p>
+          <p>Pass: <strong id="dash-pass">0</strong></p>
+          <p>Fail: <strong id="dash-fail">0</strong></p>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="sgpa-table" class="dash-table">
+          <thead>
+            <tr>
+              <th>Subject</th><th>Credit</th><th>Max</th><th>Scored</th><th>Internal</th><th>External</th><th>%</th><th>GP</th><th>GP × Credit</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CGPA DASHBOARD VIEW (hidden until CGPA calculation) -->
+    <section id="cgpa-dashboard" class="card dashboard" style="display:none;">
+      <div class="dashboard-head">
+        <h2>📋 CGPA Dashboard</h2>
+        <div class="dashboard-actions">
+          <button class="btn" onclick="printDashboard('cgpa')">🖨 Print CGPA Report</button>
+          <button class="btn" onclick="editCGPA()">✏️ Edit Semesters</button>
+          <button class="btn" onclick="closeCGPADashboard()">Close</button>
+        </div>
+      </div>
+
+      <div class="dash-top">
+        <div class="sgpa-summary">
+          <div class="label">CGPA</div>
+          <div id="dashboard-cgpa-val" class="sgpa-big">-</div>
+        </div>
+        <div class="dash-stats">
+          <p>Semesters: <strong id="dash-sems">0</strong></p>
+          <p>Total Credits: <strong id="cgpa-credits">0</strong></p>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="cgpa-table" class="dash-table">
+          <thead>
+            <tr>
+              <th>Semester</th><th>SGPA</th><th>Credit</th><th>SGPA × Credit</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="app-footer muted">Built with ❤️ — copy & reuse as needed</footer>
+  </div>
+
+  <!-- SETTINGS MODAL (popup at end of page) -->
+  <div id="settings-modal" class="modal" aria-hidden="true" style="display:none;">
+    <div class="modal-backdrop" onclick="closeSettingsModal()"></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>Grade Cutoffs & Pass Criteria</h3>
+        <button class="btn" onclick="closeSettingsModal()">Close</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="muted">Edit grade cutoff minimums (Grade Point 10 → 1). Values must be descending.</p>
+
+        <div class="grade-grid">
+          <label>10 GP (Min %)</label><input id="g10" type="number" min="0" max="100" value="95">
+          <label>9 GP (Min %)</label><input id="g9" type="number" min="0" max="100" value="85">
+          <label>8 GP (Min %)</label><input id="g8" type="number" min="0" max="100" value="75">
+          <label>7 GP (Min %)</label><input id="g7" type="number" min="0" max="100" value="65">
+          <label>6 GP (Min %)</label><input id="g6" type="number" min="0" max="100" value="55">
+          <label>5 GP (Min %)</label><input id="g5" type="number" min="0" max="100" value="45">
+          <label>4 GP (Min %)</label><input id="g4" type="number" min="0" max="100" value="35">
+          <label>3 GP (Min %)</label><input id="g3" type="number" min="0" max="100" value="25">
+          <label>2 GP (Min %)</label><input id="g2" type="number" min="0" max="100" value="15">
+          <label>1 GP (Min %)</label><input id="g1" type="number" min="0" max="100" value="5">
+        </div>
+
+        <hr/>
+
+        <h4>Failing & Component Minimums</h4>
+        <div class="controls">
+          <label>Global Fail Mark (combined %) — if combined% &lt; this → fail (GP=0)</label>
+          <input id="global-fail" type="number" min="0" max="100" value="35">
+
+          <label>Min Internal % (component)</label>
+          <input id="min-internal" type="number" min="0" max="100" value="30">
+
+          <label>Min External % (component)</label>
+          <input id="min-external" type="number" min="0" max="100" value="30">
+        </div>
+
+        <div id="settings-error" class="validation-summary" style="display:none;margin-top:10px;"></div>
+
+      </div>
+
+      <div class="modal-foot">
+        <button class="btn primary" onclick="saveSettings()">Save Settings</button>
+        <button class="btn" onclick="closeSettingsModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+  </html>
