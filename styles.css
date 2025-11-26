@@ -129,5 +129,5 @@ input:focus{box-shadow:0 8px 30px rgba(124,92,255,0.12);border-color:rgba(124,92
   background: #0d1b3a;          /* Dark Blue */
   border: 2px solid #4da3ff;    /* Light Blue Border */
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 12px rgba(77, 163, 255, 0.6);  /* Light blue glow */
 }
