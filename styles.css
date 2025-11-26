@@ -121,3 +121,13 @@ input:focus{box-shadow:0 8px 30px rgba(124,92,255,0.12);border-color:rgba(124,92
 .modal-foot{margin-top:12px;display:flex;gap:8px;justify-content:flex-end}
 
 
+/* SETTINGS PANEL HIDE / SHOW */
+.settings-panel {
+  display: none;                /* Hidden by default */
+  margin-top: 15px;
+  padding: 15px;
+  background: #0d1b3a;          /* Dark Blue */
+  border: 2px solid #4da3ff;    /* Light Blue Border */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
