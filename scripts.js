@@ -66,7 +66,7 @@ function addSubject(){
       <label>Internal - Scored</label><input type="number" id="int-scored-${subjectCount}" min="0" placeholder="e.g., 28">
     </div>
 
-    <div class="muted small">Note: Check the failing mark in the setting.if it is less than the mark required,then the grade is point zero for the given subject.</div>
+    <div class="muted small">Note: Check the failing mark in the setting.if it is less than the mark required,then the grade point is zero for the given subject📔.</div>
   `;
 
   cont.appendChild(div);
