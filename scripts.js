@@ -482,7 +482,10 @@ function openSettingsModal(){
 function closeSettingsModal(){
   $('settings-modal').style.display = 'none';
 }
-
+function toggleSettings() {
+  const panel = document.getElementById("settings-panel");
+  panel.style.display = panel.style.display === "none" ? "block" : "none";
+}
 function saveSettings(){
   // read inputs
   const newGrades = {
