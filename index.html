@@ -66,17 +66,47 @@
         <div class="muted small">Enter the number of semesters,click "Create semester field" & enter SGPA and credits for each semester.</div>
       </section>
 
-      <!-- Settings quick link -->
-      <section style="margin-top:12px;text-align:right">
-        <button class="btn" onclick="openSettingsModal()">Open Grade & Pass Criteria Settings</button>
-      </section>
+      
 
-      <!-- Settings -->
-      <section class="card" style="display:none">
-        <div class="card-head">
-          <h2>⚙️ Custom Grade Settings (Hidden)</h2>
-        </div>
-      </section>
+      <!-- SETTINGS PANEL (shows/hides instead of popup) -->
+<button class="btn" onclick="toggleSettings()" style="margin-top:12px;">⚙ Settings</button>
+
+<div id="settings-panel" class="settings-panel">
+  <h3>Grade Cutoffs & Pass Criteria</h3>
+
+  <p class="muted">Edit grade cutoff minimums (Grade Point 10 → 1). Values must be descending.</p>
+
+  <div class="grade-grid">
+    <label>10 GP (Min %)</label><input id="g10" type="number" min="0" max="100" value="95">
+    <label>9 GP (Min %)</label><input id="g9" type="number" min="0" max="100" value="85">
+    <label>8 GP (Min %)</label><input id="g8" type="number" min="0" max="100" value="75">
+    <label>7 GP (Min %)</label><input id="g7" type="number" min="0" max="100" value="65">
+    <label>6 GP (Min %)</label><input id="g6" type="number" min="0" max="100" value="55">
+    <label>5 GP (Min %)</label><input id="g5" type="number" min="0" max="100" value="45">
+    <label>4 GP (Min %)</label><input id="g4" type="number" min="0" max="100" value="35">
+    <label>3 GP (Min %)</label><input id="g3" type="number" min="0" max="100" value="25">
+    <label>2 GP (Min %)</label><input id="g2" type="number" min="0" max="100" value="15">
+    <label>1 GP (Min %)</label><input id="g1" type="number" min="0" max="100" value="5">
+  </div>
+
+  <hr/>
+
+  <h4>Failing & Component Minimums</h4>
+  <div class="controls">
+    <label>Global Fail Mark</label>
+    <input id="global-fail" type="number" min="0" max="100" value="35">
+
+    <label>Min Internal %</label>
+    <input id="min-internal" type="number" min="0" max="100" value="30">
+
+    <label>Min External %</label>
+    <input id="min-external" type="number" min="0" max="100" value="30">
+  </div>
+
+  <div id="settings-error" class="validation-summary" style="display:none;margin-top:10px;"></div>
+
+  <button class="btn primary" onclick="saveSettings()">Save Settings</button>
+</div>
     </main>
 
     <!-- SGPA DASHBOARD VIEW (hidden until SGPA calculation) -->
@@ -152,55 +182,7 @@
     <footer class="app-footer muted">Built with S2 creative❤️ — copy & reuse as needed</footer>
   </div>
 
-  <!-- SETTINGS MODAL (popup at end of page) -->
-  <div id="settings-modal" class="modal" aria-hidden="true" style="display:none;">
-    <div class="modal-backdrop" onclick="closeSettingsModal()"></div>
-    <div class="modal-card">
-      <div class="modal-head">
-        <h3>Grade Cutoffs & Pass Criteria</h3>
-        <button class="btn" onclick="closeSettingsModal()">Close</button>
-      </div>
 
-      <div class="modal-body">
-        <p class="muted">Edit grade cutoff minimums (Grade Point 10 → 1). Values must be descending.</p>
-
-        <div class="grade-grid">
-          <label>10 GP (Min %)</label><input id="g10" type="number" min="0" max="100" value="95">
-          <label>9 GP (Min %)</label><input id="g9" type="number" min="0" max="100" value="85">
-          <label>8 GP (Min %)</label><input id="g8" type="number" min="0" max="100" value="75">
-          <label>7 GP (Min %)</label><input id="g7" type="number" min="0" max="100" value="65">
-          <label>6 GP (Min %)</label><input id="g6" type="number" min="0" max="100" value="55">
-          <label>5 GP (Min %)</label><input id="g5" type="number" min="0" max="100" value="45">
-          <label>4 GP (Min %)</label><input id="g4" type="number" min="0" max="100" value="35">
-          <label>3 GP (Min %)</label><input id="g3" type="number" min="0" max="100" value="25">
-          <label>2 GP (Min %)</label><input id="g2" type="number" min="0" max="100" value="15">
-          <label>1 GP (Min %)</label><input id="g1" type="number" min="0" max="100" value="5">
-        </div>
-
-        <hr/>
-
-        <h4>Failing & Component Minimums</h4>
-        <div class="controls">
-          <label>Global Fail Mark (combined %) — if combined% &lt; this → fail (GP=0)</label>
-          <input id="global-fail" type="number" min="0" max="100" value="35">
-
-          <label>Min Internal % (component)</label>
-          <input id="min-internal" type="number" min="0" max="100" value="30">
-
-          <label>Min External % (component)</label>
-          <input id="min-external" type="number" min="0" max="100" value="30">
-        </div>
-
-        <div id="settings-error" class="validation-summary" style="display:none;margin-top:10px;"></div>
-
-      </div>
-
-      <div class="modal-foot">
-        <button class="btn primary" onclick="saveSettings()">Save Settings</button>
-        <button class="btn" onclick="closeSettingsModal()">Cancel</button>
-      </div>
-    </div>
-  </div>
 
   <script src="scripts.js"></script>
 </body>
