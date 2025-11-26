@@ -11,7 +11,7 @@
     <header class="app-header">
       <div>
         <h1>🎓 Enhanced SGPA & CGPA Calculator</h1>
-        <div class="subtitle">Modern theme — dashboards open after calculation</div>
+        <div class="subtitle">Find your SGPA and CGPA</div>
       </div>
       <div class="hdr-actions">
         <button id="toggle-theme" class="btn" onclick="toggleDarkMode()">Toggle Theme</button>
@@ -31,7 +31,7 @@
             <button class="btn primary" onclick="addSubject()">➕ Add Subject</button>
             <button class="btn warn" onclick="removeSubject()">➖ Remove Subject</button>
           </div>
-          <div class="note muted">Enter credits and marks. Use External + Internal mode if needed. Validation prevents scored &gt; total.</div>
+          <div class="note muted">Enter credits and marks. Use External + Internal mode if needed.</div>
         </div>
 
         <div id="validation-summary" class="validation-summary" style="display:none;"></div>
@@ -40,7 +40,7 @@
 
         <div class="form-actions">
           <button id="calculate-sgpa" class="btn success" onclick="handleCalculateSGPA()">Calculate SGPA & Open Dashboard</button>
-          <div class="muted small">SGPA formula: Σ(GradePoint × Credit) / Σ(Credit)</div>
+          <div class="muted small"></div>
         </div>
       </section>
 
@@ -63,7 +63,7 @@
           <button class="btn" onclick="downloadAllEntries()">Download Entries (text)</button>
         </div>
 
-        <div class="muted small">Enter SGPA and credit for each semester. CGPA = Σ(SGPA × credit) / Σ(credit)</div>
+        <div class="muted small">Enter the number of semesters,click "Create semester field" & enter SGPA and credits for each semester.</div>
       </section>
 
       <!-- Settings quick link -->
@@ -149,7 +149,7 @@
       </div>
     </section>
 
-    <footer class="app-footer muted">Built with ❤️ — copy & reuse as needed</footer>
+    <footer class="app-footer muted">Built with S2 creative❤️ — copy & reuse as needed</footer>
   </div>
 
   <!-- SETTINGS MODAL (popup at end of page) -->
