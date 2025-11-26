@@ -69,7 +69,7 @@
       
 
       <!-- SETTINGS PANEL (shows/hides instead of popup) -->
-<button class="btn" onclick="toggleSettings()" style="margin-top:12px;">⚙ Settings</button>
+<button class="btn" onclick="toggleSettings()" style="margin-top:12px;">⚙ Settings(Set your own grade cutoff and failing marks)</button>
 
 <div id="settings-panel" class="settings-panel">
   <h3>Grade Cutoffs & Pass Criteria</h3>
@@ -77,16 +77,16 @@
   <p class="muted">Edit grade cutoff minimums (Grade Point 10 → 1). Values must be descending.</p>
 
   <div class="grade-grid">
-    <label>10 GP (Min %)</label><input id="g10" type="number" min="0" max="100" value="95">
-    <label>9 GP (Min %)</label><input id="g9" type="number" min="0" max="100" value="85">
-    <label>8 GP (Min %)</label><input id="g8" type="number" min="0" max="100" value="75">
-    <label>7 GP (Min %)</label><input id="g7" type="number" min="0" max="100" value="65">
-    <label>6 GP (Min %)</label><input id="g6" type="number" min="0" max="100" value="55">
-    <label>5 GP (Min %)</label><input id="g5" type="number" min="0" max="100" value="45">
-    <label>4 GP (Min %)</label><input id="g4" type="number" min="0" max="100" value="35">
-    <label>3 GP (Min %)</label><input id="g3" type="number" min="0" max="100" value="25">
-    <label>2 GP (Min %)</label><input id="g2" type="number" min="0" max="100" value="15">
-    <label>1 GP (Min %)</label><input id="g1" type="number" min="0" max="100" value="5">
+    <label>10 Grade Point (Min %)</label><input id="g10" type="number" min="0" max="100" value="95">
+    <label>9 Grade Point (Min %)</label><input id="g9" type="number" min="0" max="100" value="85">
+    <label>8 Grade Point (Min %)</label><input id="g8" type="number" min="0" max="100" value="75">
+    <label>7 Grade Point (Min %)</label><input id="g7" type="number" min="0" max="100" value="65">
+    <label>6 Grade Point (Min %)</label><input id="g6" type="number" min="0" max="100" value="55">
+    <label>5 Grade Point (Min %)</label><input id="g5" type="number" min="0" max="100" value="45">
+    <label>4 Grade Point (Min %)</label><input id="g4" type="number" min="0" max="100" value="35">
+    <label>3 Grade Point (Min %)</label><input id="g3" type="number" min="0" max="100" value="25">
+    <label>2 Grade Point (Min %)</label><input id="g2" type="number" min="0" max="100" value="15">
+    <label>1 Grade Point (Min %)</label><input id="g1" type="number" min="0" max="100" value="5">
   </div>
 
   <hr/>
@@ -106,7 +106,7 @@
   <div id="settings-error" class="validation-summary" style="display:none;margin-top:10px;"></div>
 
   <button class="btn primary" onclick="saveSettings()">Save Settings</button>
-</div>
+</div><br>
     </main>
 
     <!-- SGPA DASHBOARD VIEW (hidden until SGPA calculation) -->
